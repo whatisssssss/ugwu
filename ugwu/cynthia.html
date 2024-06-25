@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="loco.css">
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" integrity="sha512-EZI2cBcGPnmR89wTgVnN3602Yyi7muWo8y1B3a8WmIv1J9tYG+udH4LvmYjLiGp37yHB7FfaPBo8ly178m9g4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <div id="main">
+        <div id="circle"></div>
+        <div id="page1">
+            <div id="nav">
+                <a href="#">Cynthia Ugwu</a>
+                <p>MENU+</p>
+            </div>
+            <div id="mid">
+                <div id="mid1">
+                    <div class="upw">
+                        <h1 class="upi">PRODUCT</h1>
+                    </div>
+                </div>
+                <div id="mid2">
+                    <div class="upw">
+                        <h1 class="upi">DESIGNER</h1>
+                    </div>
+    
+                    <p>BASED ON TORONTO</p>
+                </div>
+            </div>
+            <div id="footer">
+                <div id="fleft">
+                    <p>CURRENTLY WORKING AT YML</p>
+                </div>
+                <div id="fmid">
+                    <p>PROTOTYPE AMBASSADOR</p>
+                </div>
+                <div id="fright">
+                    <p>AVAILABLE FOR FREELANCE</p>
+                    <p>WORK FROM MAY'23</p>
+                </div>
+            </div>
+        </div>
+        <div id="page2">
+            <div class="elem">
+                <img src="./images/plug.png" alt="">
+                <h1>THE PLUG</h1>
+                <h5>2022</h5>
+            </div>
+            <div class="elem">
+                <img src="./images/ixperience.png" alt="">
+                <h1>IXPERIENCE</h1>
+                <h5>2022</h5>
+            </div>
+            <div class="elem elemlast">
+                <img src="./images/hudu.png" alt="">
+                <h1>HUDU</h1>
+                <h5>2022</h5>
+            </div>
+        </div>
+        
+    </div>
+    <script>
+        
+        const scroll = new LocomotiveScroll({
+        el: document.querySelector('#main'),
+        smooth: true
+        });
+        var tl=gsap.timeline()
+        tl.to(".upi",{
+            y:0,
+            duration:1,
+
+        })
+        function mouseFollower(xscale, yscale) {
+             window.addEventListener("mousemove", function (dets) {
+            document.querySelector("#circle").style.transform = `translate(${dets.clientX}px, ${dets.clientY}px) scale(${xscale}, ${yscale})`;
+            });
+        }
+        var Xscale=1;
+        var Yscale=1;
+       var timeout=0; // global variable
+        function mouseChapta(){
+           var xscale=1;
+           var yscale=1;
+           var xprev=0;
+           var yprev=0;
+            window.addEventListener('mousemove',(dets)=>{
+                clearTimeout(timeout);
+                // console.log(dets.clientX)
+               var xdiff=dets.clientX-xprev;
+                xprev=dets.clientX;
+
+                var ydiff=dets.clientY-yprev;
+                yprev=dets.clientY;
+                // console.log(xdiff, ydiff)
+                xscale=gsap.utils.clamp(0.8,1.2,xdiff);
+                yscale=gsap.utils.clamp(0.8,1.2,ydiff);
+
+                Xscale=xscale;
+                Yscale=yscale;
+                mouseFollower(xscale,yscale);
+                timeout=setTimeout(function(){
+                    document.querySelector("#circle").style.transform=`translate(${dets.clientX + xdiff*2}px, ${dets.clientY + ydiff*2}px)scale(1,1)`;
+                },100);
+            })
+        }
+        mouseChapta()
+        function circleScale(elem,xscale,yscale){
+            elem.addEventListener("mouseenter",(detail)=>{
+                gsap.to("#circle",{
+                    scaleX: xscale*2,
+                    scaleY:yscale*2,
+                })
+            })
+        }
+        document.querySelectorAll(".elem").forEach((elem)=>{
+            circleScale(elem,Xscale,Yscale)
+        })
+
+        // bring pictures and rotate them
+        document.querySelectorAll(".elem").forEach((dets)=>{
+            var rotate=0;
+            var difference=0;
+            
+            dets.addEventListener('mousemove',(details)=>{
+                
+                var diff=details.clientY-dets.getBoundingClientRect().top
+                difference= details.clientX-rotate;
+                rotate=details.clientX;
+                gsap.to(dets.querySelector("img"),{
+                    opacity:1,
+                    top:diff,
+                    left: details.clientX,
+                    rotate: gsap.utils.clamp(-20,20,difference)
+                })
+            })
+            dets.addEventListener('mouseleave',(details)=>{
+                gsap.to(dets.querySelector("img"),{
+                    opacity:0,
+                })
+            })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+@font-face {
+    font-family: "Sans";
+    src: url(/GeneralSans-Regular.otf);  /* not the woff*/
+}
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+    font-family: "Sans";
+    color: white;
+}
+html,body{
+    height: 100%;
+    width: 100%;
+    /* overflow: hidden; */
+}
+
+#main{
+    width: 100%;
+    background: #000;
+}
+#page1{
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+#nav{
+    align-items: flex-start;
+    background-color: black;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5px 65px;
+    /* position: fixed; */
+}
+#nav a,h6{
+    font-size: 18px;
+    text-decoration: none;
+}
+#mid{
+    background-color: black;
+    padding-top: 13vh;
+    overflow: hidden; /*to remove extra white space from the page borders  */
+}
+#mid h1{
+    font-size: 20vh;
+    line-height: 0.85;
+    margin-left: 70px;
+    /* transform: scaleX(1.1); */
+    opacity: 0.75;
+    transform: translateY(100%);
+}
+.upw{    /*upw is for the div for fit content etc*/
+    width: fit-content;
+    /* background-color: red; */
+    overflow: hidden;
+}
+.upw .upi{
+    transform: translateY(100%);
+}
+#mid2{
+    width: fit-content;
+   
+    /* background-color: red; */
+}
+#mid2 h1{
+    margin-left: 235px;
+    display: inline;
+    transform: scaleX(1.1);
+    /* margin-bottom: 0.25; */
+    font-weight: 900;
+    letter-spacing: 1px;
+    
+}
+#mid2 p{
+    text-align: right;
+    /* background-color: yellow; */
+}
+#footer{ 
+    background-color: black;
+    padding: 0px 65px; /*left-right same padding as nav to put the elements in the same line*/
+    margin-top: 180px;
+    align-items: flex-end;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+} 
+#fright{
+    text-align: right;
+}
+#circle{
+    background-color: white;
+    border-radius: 50%;
+    height:12px;
+    width:12px;
+    position: absolute;
+    z-index: 9999;
+    transition: all cubic-bezier(0.19, 1, 0.22, 1)1s;
+}
+ #page2 { 
+    color: #fff;
+    padding-right: 10vw;
+    padding-top: 200px;
+    background-color: black;
+    width: 100%;
+    height: 100vh;
+}
+
+.elem {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 3.5vw 3vw;
+    padding-right: 0;
+    border-top: 1px solid #888;
+} 
+.elem img {
+    opacity: 0;
+    pointer-events: none;
+    height: 140%;
+    z-index: 999;
+    position: absolute;
+    /* transform: translate(-50%, -50%); */
+}
+.elemlast{
+    border-bottom: 1px solid #888;
+}
+.elem h1{
+    font-size: 16vh;
+    opacity: 0.5;
+}
+#page3{
+    height: 100vh;
+    width: 100%;
+}
